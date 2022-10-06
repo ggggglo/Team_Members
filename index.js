@@ -1,10 +1,9 @@
 // Packages required 
-const { getDiffieHellman } = require('crypto');
 const inquirer = require('inquirer');
 const fs = require('fs').promises
 
 // Constant with parameters to input information from the user answers into the template literal
-const generateHTML = ({names, role, id, email, number, test, github, school}) =>
+const generateHTML = ({names, role, id, email, number, github, school}) =>
 
 //Template literal for HTML to be created 
 `<!DOCTYPE html>
