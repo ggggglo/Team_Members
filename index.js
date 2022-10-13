@@ -136,7 +136,7 @@ inquirer.prompt([
 
 .then((answers) => {
     const htmlContent = generateHTML(answers);
-    fs.writeFile('index.html', htmlContent, (err) =>
+    fs.writeFile('./dist/index.html', htmlContent, (err) =>
     err ? console.log(err) : console.log('Successfully created your team website!')
     );
 });
