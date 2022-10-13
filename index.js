@@ -1,10 +1,10 @@
 // Packages required 
-const { get } = require('http');
 const inquirer = require('inquirer');
 const fs = require('fs').promises;
 
 // Constant with parameters to input information from the user answers into the template literal
-const generateHTML = ({manName, engName, intName, manId, engId, intId, manEmail, engEmail, intEmail, number, github, school}) =>
+
+const generateHTML = ({names, id, role, email, last}) =>
 
 //Template literal for HTML to be created 
 `<!DOCTYPE html>
@@ -13,33 +13,36 @@ const generateHTML = ({manName, engName, intName, manId, engId, intId, manEmail,
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/hqf7xng.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
     <title>My Team</title>
 </head>
 <body>
-    <header>My Team</header>
+    <header>You've added a new ${role} to your team!</header>
     
 <main>
-    <h2>${manName}</h2>
-    <h2>Manager</h2>
-    <h4>Employee ID: ${manId} </h4>
-    <h4>Email address: ${manEmail}</h4>
-    <h4>Office Number: ${number}</h4>
-
-    <h2>${engName}</h2>
-    <h2>Engineer</h2>
-    <h4>Employee ID: ${engId} </h4>
-    <h4>Email address: ${engEmail}</h4>
-    <h4>Githublink: ${github}</h4>
-
-    <h2>${intName}</h2>
-    <h2>Intern</h2>
-    <h4>Employee ID: ${intId} </h4>
-    <h4>Email address: ${intEmail}</h4>
-    <h4>School: ${school}</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+        <div class="col employee">
+        <h4 class="name">${names}</h2>
+        <h4 class="role">Employee role: ${role}</h2>
+        <h4 class="id">Employee ID: ${id}</h4>
+        <h4 class="email">Email: ${email}</h4>
+        <h4 class="last">Office Number: ${last}</h4>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
 </main>
 </body>
 </html>`;
 
+//Get user input to create HTML
 inquirer.prompt([
     {
         type:'list',
@@ -51,84 +54,84 @@ inquirer.prompt([
     {
         type: 'input',
         prefix: 2,
-        name: 'manName',
+        name: 'names',
         message: 'Enter your new manager name:',
         when: (answers) => answers.role === 'Manager'
     },
     {
         type: 'input',
         prefix: 2,
-        name: 'engName',
+        name: 'names',
         message: 'Enter your new engineer name:',
         when: (answers) => answers.role === 'Engineer'
     },
     {
         type: 'input',
         prefix: 2,
-        name: 'intName',
+        name: 'names',
         message: 'Enter you new intern name:',
         when: (answers) => answers.role === 'Intern'
     },
     {
         type: 'input',
         prefix: 3,
-        name: 'manId',
+        name: 'id',
         message: 'Enter your new manager id: ',
         when: (answers) => answers.role === 'Manager'
     },
     {
         type: 'input',
         prefix: 3,
-        name: 'engId',
+        name: 'id',
         message: 'Enter your new engineer id: ',
         when: (answers) => answers.role === 'Engineer'
     },
     {
         type: 'input',
         prefix: 3,
-        name: 'intId',
+        name: 'id',
         message: 'Enter your new intern id: ',
         when: (answers) => answers.role === 'Intern'
     },
     {
         type: 'input',
         prefix: 4,
-        name: 'manEmail',
+        name: 'email',
         message: 'Enter your new manager email: ',
         when: (answers) => answers.role === 'Manager'
     },
     {
         type: 'input',
         prefix: 4,
-        name: 'engEmail',
+        name: 'email',
         message: 'Enter your new engineer email: ',
         when: (answers) => answers.role === 'Engineer'
     },
     {
         type: 'input',
         prefix: 4,
-        name: 'intEmail',
+        name: 'email',
         message: 'Enter your new intern email: ',
         when: (answers) => answers.role === 'Intern'
     },
     {
         type:'input',
         prefix: 5,
-        name: 'number',
+        name: 'last',
         message: 'Enter your new manager office number: ',
         when: (answers) => answers.role === 'Manager'
     },
     {
         type:'input',
         prefix: 5,
-        name: 'github',
+        name: 'last',
         message: 'Enter your new engineer GitHub link: ',
         when: (answers) => answers.role === 'Engineer'
     },
     {
         type:'input',
         prefix: 5,
-        name: 'school',
+        name: 'last',
         message: 'Enter your new interns school: ',
         when: (answers) => answers.role === 'Intern'
     },
@@ -136,7 +139,7 @@ inquirer.prompt([
 
 .then((answers) => {
     const htmlContent = generateHTML(answers);
-    fs.writeFile('./dist/index.html', htmlContent, (err) =>
+    fs.appendFile('./dist/index.html', htmlContent, (err) =>
     err ? console.log(err) : console.log('Successfully created your team website!')
     );
 });
