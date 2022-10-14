@@ -15,3 +15,7 @@ An application that when started:
 
 # Website Images
 ![image1](./assets/images/web1.png)
+
+# Links
+GitHub repo: https://github.com/ggggglo/team_members
+Deployed website: 
