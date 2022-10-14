@@ -31,8 +31,8 @@ const generateHTML = ({names, id, role, email, last}) =>
         <h4 class="name">${names}</h2>
         <h4 class="role">Employee role: ${role}</h2>
         <h4 class="id">Employee ID: ${id}</h4>
-        <h4 class="email">Email: ${email}</h4>
-        <h4 class="last">Office Number: ${last}</h4>
+        <h4 class="email">Email: <a href=mailto:${email}>${email}<a></h4>
+        <h4 class="last">${last}</h4>
     </div>
     <div class="col-sm">
     </div>
