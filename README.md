@@ -18,4 +18,3 @@ A simple application in order to keep track of your new team members and their d
 
 # Links
 GitHub repo: https://github.com/ggggglo/team_members
-Deployed website: 
