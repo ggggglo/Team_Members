@@ -4,7 +4,7 @@
 A simple application in order to keep track of your new team members and their data. 
 
 # Objectives
-An application that when started:
+- An application that when started:
     - Will prompt the user to ask questions about their new team members
     - Will create an HTML with the new data
     - Will not overwrite data
